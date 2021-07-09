@@ -21,3 +21,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/movie/{id}', [App\Http\Controllers\MovieController::class, 'show'])->name('movie');
+
+Route::middleware('auth.admin')->get('/admin', function () {
+    return "Bro You are an admin";
+});
