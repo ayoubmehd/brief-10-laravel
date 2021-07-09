@@ -14,7 +14,9 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        return view('home', [
+            'movies' => Movie::all()
+        ]);
     }
 
     /**
@@ -24,7 +26,6 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
