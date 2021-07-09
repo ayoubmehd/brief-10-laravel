@@ -22,7 +22,8 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'content' => $this->faker->text(),
+            'votes' => \random_int(-500, 500)
         ];
     }
 }
