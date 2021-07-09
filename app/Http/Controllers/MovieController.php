@@ -24,7 +24,7 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
     }
 
@@ -45,9 +45,9 @@ class MovieController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
+    public function show(Movie $movie, $id)
     {
-        //
+        return view('movie', ['movie' => Movie::with('comments')->find($id)]);
     }
 
     /**
