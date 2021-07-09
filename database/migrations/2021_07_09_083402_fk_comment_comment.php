@@ -14,7 +14,7 @@ class FkCommentComment extends Migration
     public function up()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->foreignId('comment_id')->constrained();
+            $table->foreignId('comment_id')->nullable()->constrained();
         });
     }
 
