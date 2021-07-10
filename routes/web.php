@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +22,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/movie/{id}', [App\Http\Controllers\MovieController::class, 'show'])->name('movie');
 
-Route::middleware('auth.admin')->get('/admin', function () {
-    return "Bro You are an admin";
+Route::middleware('auth.admin')->prefix('admin')->group(function () {
+    Route::get('/add', [MovieController::class, 'create'])->name('add');
+    Route::post('/add', [MovieController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [MovieController::class, 'edit'])->name('edit');
+    Route::post('/edit/{id}', [MovieController::class, 'update'])->name('update');
 });
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/movie/{id}', [MovieController::class, 'show'])->name('movie');

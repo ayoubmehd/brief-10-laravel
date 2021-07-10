@@ -24,8 +24,9 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
+        return \view('add-movie');
     }
 
     /**
@@ -36,7 +37,15 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $movie = new Movie();
+        // Upload poster
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('posters');
+            $movie->poster = $path;
+        }
+        $movie->title = $request->title;
+        $movie->publishing_date = $request->publishing_date;
+        $movie->save();
     }
 
     /**
@@ -47,7 +56,7 @@ class MovieController extends Controller
      */
     public function show(Movie $movie, $id)
     {
-        return view('movie', ['movie' => Movie::with('comments')->find($id)]);
+        return view('movie', ['movie' => $this->getOne($id)]);
     }
 
     /**
@@ -56,9 +65,9 @@ class MovieController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Movie $movie)
+    public function edit(Movie $movie, $id)
     {
-        //
+        return \view('edit-movie', ['movie' => $this->getOne($id)]);
     }
 
     /**
@@ -68,9 +77,17 @@ class MovieController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movie $movie)
+    public function update(Request $request, Movie $movie, $id)
     {
-        //
+        $movie = Movie::find($id);
+        // Upload poster
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('posters');
+            $movie->poster = $path;
+        }
+        $movie->title = $request->title;
+        $movie->publishing_date = $request->publishing_date;
+        $movie->save();
     }
 
     /**
@@ -82,5 +99,10 @@ class MovieController extends Controller
     public function destroy(Movie $movie)
     {
         //
+    }
+
+    private function getOne($id)
+    {
+        return Movie::with('comments')->find($id);
     }
 }
