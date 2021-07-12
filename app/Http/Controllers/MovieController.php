@@ -46,6 +46,8 @@ class MovieController extends Controller
         $movie->title = $request->title;
         $movie->publishing_date = $request->publishing_date;
         $movie->save();
+
+        return \redirect()->route('home');
     }
 
     /**
@@ -88,6 +90,8 @@ class MovieController extends Controller
         $movie->title = $request->title;
         $movie->publishing_date = $request->publishing_date;
         $movie->save();
+
+        return \redirect()->route('home');
     }
 
     /**
@@ -96,9 +100,12 @@ class MovieController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movie $movie)
+    public function destroy(Movie $movie, $id)
     {
-        //
+        Movie::findOrFail($id)->delete();
+
+
+        return \redirect()->route('home');
     }
 
     private function getOne($id)

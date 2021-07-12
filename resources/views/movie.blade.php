@@ -18,13 +18,15 @@
     <div class="col-md-8">
         <div class="card border-secondary">
             <div class="card-body">
-                <form action="">
+                <form action="{{ route('comments.create', ['movie_id' => $movie->id]) }}" method="POST">
+
+                    @csrf
                     <div class="form-group">
                         <label for="comment">Comment</label>
                         <textarea type="email" class="form-control" name="comment" id="comment" aria-describedby="emailHelpId" placeholder="Comment"></textarea>
                     </div>
                     <div class="form-group d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary">Post</button>
+                        <button type="submit" class="btn btn-primary">Post</button>
                     </div>
                 </form>
 

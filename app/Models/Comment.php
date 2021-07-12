@@ -9,9 +9,15 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['content'];
 
     function replies()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    function post()
+    {
+        return $this->belongsTo(Movie::class, 'movie_id');
     }
 }

@@ -20,7 +20,8 @@
                 <a href="{{ route('movie', ['id' => $value->id]) }}" class="btn btn-primary">Movie Page</a>
                 @if(Auth::user()->isAdmin())
                 <a href="{{ route('edit', ['id' => $value->id]) }}" class="btn btn-outline-primary">Edit Movie</a>
-                <a href="{{-- route('remove', ['id' => $value->id]) --}}" class="btn btn-danger">Remove Movie</a>
+                <a href="{{ route('destroy', ['id' => $value->id]) }}" class="btn btn-danger">Remove Movie</a>
+
                 @endif
             </div>
         </div>

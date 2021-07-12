@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\HomeController;
+use App\Models\Comment;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +30,10 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::post('/add', [MovieController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [MovieController::class, 'edit'])->name('edit');
     Route::post('/edit/{id}', [MovieController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [MovieController::class, 'destroy'])->name('destroy');
+});
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::post('comments/{movie_id}', [CommentController::class, 'store'])->name('comments.create');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
