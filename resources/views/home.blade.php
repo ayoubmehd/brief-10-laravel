@@ -18,11 +18,13 @@
                     {{ $value->publishing_date }}
                 </h6>
                 <a href="{{ route('movie', ['id' => $value->id]) }}" class="btn btn-primary">Movie Page</a>
+                @auth
                 @if(Auth::user()->isAdmin())
                 <a href="{{ route('edit', ['id' => $value->id]) }}" class="btn btn-outline-primary">Edit Movie</a>
                 <a href="{{ route('destroy', ['id' => $value->id]) }}" class="btn btn-danger">Remove Movie</a>
 
                 @endif
+                @endauth
             </div>
         </div>
     </div>
