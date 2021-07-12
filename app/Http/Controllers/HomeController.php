@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        // dd(Movie::paginate(10));
         return view('home', [
             'movies' => Movie::paginate(10)
         ]);

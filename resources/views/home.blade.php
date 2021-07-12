@@ -7,7 +7,13 @@
                             {{ session('status') }}
 </div>
 @endif --}}
+<div class="d-flex justify-content-center">
+    {{ $movies->links() }}
+</div>
+
 <div class="row justify-content-center">
+
+
     @foreach($movies as $value)
     <div class="col-md-6 mb-4">
         <div class="card">
@@ -29,6 +35,12 @@
         </div>
     </div>
     @endforeach
+
+
 </div>
+<div class="d-flex justify-content-center">
+    {{ $movies->links() }}
+</div>
+
 </div>
 @endsection
